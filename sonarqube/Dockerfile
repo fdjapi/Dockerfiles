@@ -4,7 +4,6 @@ FROM fresh as build
 ARG ALPINE_VERSION
 ARG JAVA_VERSION
 ARG SONARQUBE_VERSION
-ARG BUILD_NUMBER
 
 LABEL org.opencontainers.images.authors="fdjapi@gmail.com"
 LABEL ALPINE_VERSION=${ALPINE_VERSION}
@@ -15,7 +14,7 @@ LABEL SONARQUBE_VERSION=${SONARQUBE_VERSION}
 RUN apk update
 
 # Download OpenJDK
-RUN wget -O /tmp/openjdk.tar.gz "https://download.java.net/java/GA/jdk${JAVA_VERSION}/${BUILD_NUMBER}/GPL/openjdk-${JAVA_VERSION}_linux-x64_bin.tar.gz"
+RUN wget -O /tmp/openjdk.tar.gz "https://download.java.net/java/GA/jdk${JAVA_VERSION}/17/GPL/openjdk-${JAVA_VERSION}_linux-x64_bin.tar.gz"
 
 # Extract OpenJDK and clean up
 RUN tar -xf /tmp/openjdk.tar.gz -C /opt/
