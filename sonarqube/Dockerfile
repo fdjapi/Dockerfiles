@@ -15,7 +15,7 @@ LABEL SONARQUBE_VERSION=${SONARQUBE_VERSION}
 RUN apk update
 
 # Download OpenJDK
-RUN wget -O /tmp/openjdk.tar.gz "https://download.java.net/java/GA/jdk${JAVA_VERSION}/${BUILD_NUMBER}/GPL/openjdk-${JAVA_VERSION}_linux-x64_bin.tar.gz"
+RUN wget -O /tmp/openjdk.tar.gz "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17%2B35/OpenJDK17-jdk_x64_alpine-linux_hotspot_17_35.tar.gz"
 
 # Extract OpenJDK and clean up
 RUN tar -xf /tmp/openjdk.tar.gz -C /opt/
