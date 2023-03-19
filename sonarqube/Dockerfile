@@ -1,7 +1,8 @@
 FROM fresh as build 
 ARG ALPINE_VERSION
-ARG JAVA_VERSION  
+ARG JAVA_VERSION
 ARG SONARQUBE_VERSION
+ARG BUILD_NUMBER
 LABEL org.opencontainers.images.authors="fdjapi@gmail.com"
 LABEL ALPINE_VERSION=${ALPINE_VERSION}
 LABEL JAVA_VERSION=${JAVA_VERSION}
@@ -9,7 +10,7 @@ LABEL SONARQUBE_VERSION=${SONARQUBE_VERSION}
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/v${ALPINE_VERSION}/main > /etc/apk/repositories"
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/v${ALPINE_VERSION}/community >> /etc/apk/repositories"
 RUN apk update
-RUN wget -O /tmp/openjdk.tar.gz "https://download.java.net/openjdk/jdk${JAVA_VERSION}/ri/openjdk-${JAVA_VERSION}+${build_number}_linux-x64_bin.tar.gz"
+RUN wget -O /tmp/openjdk.tar.gz "https://download.java.net/openjdk/jdk${JAVA_VERSION}/ri/openjdk-${JAVA_VERSION}+${BUILD_NUMBER}_linux-x64_bin.tar.gz"
 RUN tar -xf /tmp/openjdk.tar.gz -C /opt/
 RUN rm /tmp/openjdk.tar.gz
 ENV JAVA_HOME=/opt/jdk-${JAVA_VERSION}
