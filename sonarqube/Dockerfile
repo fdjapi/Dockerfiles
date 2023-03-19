@@ -14,7 +14,7 @@ LABEL SONARQUBE_VERSION=${SONARQUBE_VERSION}
 RUN apk update
 
 # Download OpenJDK
-RUN wget -O /tmp/openjdk.tar.gz "https://download.java.net/java/GA/jdk${JAVA_VERSION}/17/GPL/openjdk-${JAVA_VERSION}_linux-x64_bin.tar.gz"
+RUN wget -O /tmp/openjdk.tar.gz "https://download.java.net/java/GA/jdk${JAVA_VERSION}/${JAVA_VERSION}/binaries/openjdk-${JAVA_VERSION}_linux-x64_bin.tar.gz"
 
 # Extract OpenJDK and clean up
 RUN tar -xf /tmp/openjdk.tar.gz -C /opt/
