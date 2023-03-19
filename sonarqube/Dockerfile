@@ -9,9 +9,13 @@ LABEL SONARQUBE_VERSION=${SONARQUBE_VERSION}
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/v${ALPINE_VERSION}/main > /etc/apk/repositories"
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/v${ALPINE_VERSION}/community >> /etc/apk/repositories"
 RUN apk update
-RUN apk add openjdk${JAVA_VERSION}
-RUN apk add bash
+RUN wget -O /tmp/openjdk.tar.gz "https://download.java.net/openjdk/jdk${JAVA_VERSION}/ri/openjdk-${JAVA_VERSION}+${build_number}_linux-x64_bin.tar.gz"
+RUN tar -xf /tmp/openjdk.tar.gz -C /opt/
+RUN rm /tmp/openjdk.tar.gz
+ENV JAVA_HOME=/opt/jdk-${JAVA_VERSION}
+ENV PATH="$JAVA_HOME/bin:$PATH"
 RUN wget -O /opt/sonarqube.zip "https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-${SONARQUBE_VERSION}.zip"
+RUN apk add bash
 RUN unzip /opt/sonarqube.zip -d /opt/
 RUN rm /opt/sonarqube.zip
 FROM build
