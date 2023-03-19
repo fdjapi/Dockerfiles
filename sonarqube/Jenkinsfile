@@ -1,11 +1,14 @@
-library('pipeline-utility-steps@2.15.1')
-
 node {
     stage('Build Fresh Image Sonarqube'){
         checkout scm
-        def props = readproperties file: 'sonarqube/build.properties'
+        def props = [:]
+        def fileContents = readFile file: 'sonarqube/build.properties'
+        fileContents.eachLine {
+            def (key, value) = it.split('=')
+            props[key.trim()] = value.trim()
+        }
         sh "wget https://raw.githubusercontent.com/alpinelinux/docker-alpine/v${props.ALPINE_VERSION}/x86_64/Dockerfile -O Dockerfile"
-        def ROOTFS = readFile('Dockerfile').readlines()[1].split()[1]
+        def ROOTFS = readFile('Dockerfile').readLines()[1].split()[1]
         sh "wget https://github.com/alpinelinux/docker-alpine/raw/v${props.ALPINE_VERSION}/x86_64/${ROOTFS} -O ${ROOTFS}"
         docker.build('fresh')
         docker.withRegistry(props.MSR, props.MSRCREDS){
@@ -16,6 +19,4 @@ node {
             sonarqube/").push()
         }
     }
-    
-    
 }
