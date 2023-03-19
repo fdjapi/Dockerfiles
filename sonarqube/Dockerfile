@@ -1,5 +1,5 @@
-# Use an official Alpine Linux image as the base image
-FROM alpine:${ALPINE_VERSION} as build
+# Use the 'fresh' image as the base image
+FROM fresh as build
 
 ARG ALPINE_VERSION
 ARG JAVA_VERSION
@@ -10,10 +10,6 @@ LABEL org.opencontainers.images.authors="fdjapi@gmail.com"
 LABEL ALPINE_VERSION=${ALPINE_VERSION}
 LABEL JAVA_VERSION=${JAVA_VERSION}
 LABEL SONARQUBE_VERSION=${SONARQUBE_VERSION}
-
-# Set up the repositories
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/v${ALPINE_VERSION}/main" > /etc/apk/repositories
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/v${ALPINE_VERSION}/community" >> /etc/apk/repositories
 
 # Update the package list
 RUN apk update
