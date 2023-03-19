@@ -10,11 +10,9 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v${ALPINE_VERSION}/main > /etc/ap
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/v${ALPINE_VERSION}/community >> /etc/apk/repositories"
 RUN apk update
 RUN apk add openjdk${JAVA_VERSION}
-ADD https://binaries.sonarsource.com/commercialDistribution/sonarqube-enterprise-${SONARQUBE_VERSION}.zip  /opt/sonarqube-enterprise-${SONARQUBE_VERSION}.zip
-RUN apk add unzip
-RUN unzip /opt/sonarqube-enterprise-${SONARQUBE_VERSION}.zip -d /opt/
-RUN apk del unzip
-RUN rm -f /opt/sonarqube-enterprise-${SONARQUBE_VERSION}.zip
+RUN wget -O /opt/sonarqube.zip "https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-${SONARQUBE_VERSION}.zip"
+RUN unzip /opt/sonarqube.zip -d /opt/
+RUN rm /opt/sonarqube.zip
 FROM build
 ENV SONARQUBE_HOME=/opt/sonarqube-${SONARQUBE_VERSION}
 ADD sonar.properties  ${SONARQUBE_HOME}/conf/sonar.properties
