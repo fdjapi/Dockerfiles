@@ -26,7 +26,7 @@ ENV JAVA_HOME=/opt/jdk-${JAVA_VERSION}
 ENV PATH="$JAVA_HOME/bin:$PATH"
 
 # Download SonarQube
-RUN wget -O /opt/sonarqube.zip "https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-${SONARQUBE_VERSION}.zip"
+RUN wget -O /opt/sonarqube.zip "https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.9.0.65466.zip"
 
 # Install Bash and unzip
 RUN apk add --no-cache bash unzip
