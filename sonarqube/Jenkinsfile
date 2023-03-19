@@ -12,7 +12,7 @@ node {
         sh "wget https://github.com/alpinelinux/docker-alpine/raw/v${props.ALPINE_VERSION}/x86_64/${ROOTFS} -O ${ROOTFS}"
         docker.build('fresh')
         docker.withRegistry(props.MSR, props.MSRCREDS){
-            docker.build("docker-datacenter/sonarqube:${params.BUILDENV}-${props.SONARQUBE_VERSION}",
+            docker.build("fdjapi10/sonarqube:${params.BUILDENV}-${props.SONARQUBE_VERSION}",
             "--build-arg  ALPINE_VERSION=${props.ALPINE_VERSION} \
             --build-arg JAVA_VERSION=${props.JAVA_VERSION} \
             --build-arg SONARQUBE_VERSION=${props.SONARQUBE_VERSION} \
