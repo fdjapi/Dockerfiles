@@ -1,3 +1,5 @@
+library('pipeline-utility-steps')
+
 node {
     stage('Build Fresh Image Sonarqube'){
         checkout scm
