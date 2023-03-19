@@ -10,6 +10,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v${ALPINE_VERSION}/main > /etc/ap
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/v${ALPINE_VERSION}/community >> /etc/apk/repositories"
 RUN apk update
 RUN apk add openjdk${JAVA_VERSION}
+RUN apk add bash
 RUN wget -O /opt/sonarqube.zip "https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-${SONARQUBE_VERSION}.zip"
 RUN unzip /opt/sonarqube.zip -d /opt/
 RUN rm /opt/sonarqube.zip
